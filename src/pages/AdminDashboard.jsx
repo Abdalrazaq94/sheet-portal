@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 
 function AdminDashboard({ theme, setTheme }) {
@@ -18,8 +18,8 @@ function AdminDashboard({ theme, setTheme }) {
       const searchDoc = await getDoc(doc(db, "config", "search"));
       if (searchDoc.exists()) setSearchConfig(searchDoc.data());
 
-      const adminsDoc = await getDoc(doc(db, "config", "admins_count"));
-      if (adminsDoc.exists()) setAdminsCount(adminsDoc.data().count);
+      const adminsSnap = await getDocs(collection(db, "users"));
+      setAdminsCount(adminsSnap.size);
     };
     fetchData();
   }, []);

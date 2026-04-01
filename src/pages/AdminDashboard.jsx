@@ -3,7 +3,7 @@ import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
-
+import Navbar from "../components/Navbar";
 function AdminDashboard({ theme, setTheme }) {
   const [sheetName, setSheetName] = useState(null);
   const [searchConfig, setSearchConfig] = useState(null);
@@ -31,34 +31,18 @@ function AdminDashboard({ theme, setTheme }) {
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-secondary)" }}>
-      <nav style={{
-        background: "var(--bg-card)",
-        borderBottom: "0.5px solid var(--border)",
-        padding: "0 1.5rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        gap: "10px",
-        minHeight: "56px"
-      }}>
-        <span style={{ fontWeight: "700", fontSize: "1.1rem", color: "var(--accent)" }}>محروقات ديرالزور</span>
-        <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-          <Link to="/admin" style={navStyle(true)}>الرئيسية</Link>
-          <Link to="/admin/manage" style={navStyle(false)}>إدارة المستخدمين</Link>
-          <Link to="/admin/connect" style={navStyle(false)}>ربط الملف</Link>
-          <Link to="/admin/settings" style={navStyle(false)}>إعدادات البحث</Link>
-        </div>
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <button onClick={() => setTheme(theme === "light" ? "dark" : "light")} style={iconBtn}>
-            {theme === "light" ? "🌙" : "☀️"}
-          </button>
-          <button onClick={handleLogout} style={{ ...iconBtn, color: "var(--danger)" }}>
-            خروج
-          </button>
-        </div>
-      </nav>
-
+      <Navbar
+  theme={theme}
+  setTheme={setTheme}
+  onLogout={handleLogout}
+  activeLink="/admin"
+  links={[
+    { to: "/admin", label: "الرئيسية" },
+    { to: "/admin/manage", label: "إدارة المستخدمين" },
+    { to: "/admin/connect", label: "ربط الملف" },
+    { to: "/admin/settings", label: "إعدادات البحث" },
+  ]}
+/>
       <div style={{ padding: "1.5rem", maxWidth: "900px", margin: "0 auto" }}>
         <h2 style={{ fontSize: "1.2rem", fontWeight: "500", marginBottom: "1.2rem" }}>لوحة التحكم</h2>
 

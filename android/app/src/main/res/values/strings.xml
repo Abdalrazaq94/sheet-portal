@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Mahruqat Deir Ezzor</string>
-    <string name="title_activity_main">Mahruqat Deir Ezzor</string>
+    <string name="app_name">محروقات ديرالزور</string>
+    <string name="title_activity_main">محروقات ديرالزور</string>
     <string name="package_name">com.mahruqat.deirezor</string>
     <string name="custom_url_scheme">com.mahruqat.deirezor</string>
 </resources>
